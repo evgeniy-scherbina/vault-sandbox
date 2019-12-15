@@ -22,7 +22,7 @@ job "deploy" {
         port_map {
           mongo = 27017
         }
-        
+
         volume_driver = "pxd"
 
         sysctl {
@@ -40,8 +40,8 @@ job "deploy" {
       }
 
       resources {
-        cpu    = 1000
-        memory = 1024
+        cpu    = 500 # MHz
+        memory = 128 # MB
 
         network {
           mbits = 100
