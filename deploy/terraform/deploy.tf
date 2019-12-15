@@ -47,7 +47,7 @@ resource "aws_instance" "example" {
       user        = "ec2-user"
       host        = aws_instance.example.public_ip
       agent       = "false"
-      private_key = "${file("/Users/evgeniyscherbina/.ssh/id_rsa")}"
+      private_key = "${file("/Users/evgeniyscherbina/.ssh/id_rsa_test")}"
     }
 
     inline = [
@@ -64,7 +64,7 @@ resource "aws_instance" "example" {
       "sudo yum install -y git",
       "git clone https://github.com/evgeniy-scherbina/vault-sandbox.git /home/ec2-user/go/src/github.com/evgeniy-scherbina/vault-sandbox",
       "go get -u github.com/golang/dep/cmd/dep",
-      // "cd /home/ec2-user/go/src/github.com/evgeniy-scherbina/calc && dep ensure",
+      "cd /home/ec2-user/go/src/github.com/evgeniy-scherbina/vault-sandbox",
 
       # Install docker
       "sudo yum install -y docker",
@@ -74,7 +74,7 @@ resource "aws_instance" "example" {
 
       "sudo nomad agent -dev &",
       "sleep 5",
-      "cd deploy/nomad && sudo nomad job run calc.nomad",
+      "cd deploy/nomad && sudo nomad job run deploy.nomad",
     ]
   }
 }
