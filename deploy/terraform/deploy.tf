@@ -68,6 +68,7 @@ resource "aws_instance" "example" {
 
       # Install docker
       "sudo yum install -y docker",
+      "sudo service docker start",
 
       "curl -L https://releases.hashicorp.com/nomad/0.9.3/nomad_0.9.3_linux_amd64.zip > nomad.zip",
       "sudo unzip nomad.zip -d /usr/bin",

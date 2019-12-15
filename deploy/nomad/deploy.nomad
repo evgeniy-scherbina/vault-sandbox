@@ -1,4 +1,4 @@
-job "calc" {
+job "deploy" {
   datacenters = ["dc1"]
 
   type = "service"
@@ -7,7 +7,7 @@ job "calc" {
   # 30 second intervals.
   update {
     stagger      = "30s"
-    max_parallel = 2
+    max_parallel = 1
   }
 
   group "database" {
@@ -21,6 +21,16 @@ job "calc" {
 
         port_map {
           mongo = 27017
+        }
+        
+        volume_driver = "pxd"
+
+        sysctl {
+          "net.core.somaxconn" = "16384"
+        }
+
+        ulimit {
+          nofile = "262144"
         }
       }
 
